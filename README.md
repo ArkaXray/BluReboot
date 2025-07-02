@@ -1,18 +1,26 @@
-# 🔄 BluReboot
+# BluReboot Pro - مدیریت پیشرفته ریبوت سرور
 
-**BluReboot** is an interactive reboot scheduler script for Ubuntu servers.
+![BluReboot Banner](https://i.imgur.com/JK7wF9x.png)
 
-## Features
+## ✨ ویژگی‌های کلیدی
 
-- Interactive terminal UI with [gum](https://github.com/charmbracelet/gum)
-- Choose reboot interval: 30min, 1h, 3h, 6h, 12h
-- Uses cron for scheduling reboot jobs
-- Easy installation script
+### 📅 زمان‌بندی هوشمند
+- پشتیبانی از بازه‌های زمانی مختلف (30 دقیقه تا هفتگی)
+- امکان تنظیم زمان‌بندی سفارشی با فرمت Cron
+- نمایش زمان‌بندی‌های فعال
 
-## Installation
+### 🚀 ریبوت فوری
+- ریبوت سریع با تاییدیه امنیتی
+- شمارش معکوس 10 ثانیه‌ای قبل از ریبوت
+- امکان لغو عملیات
 
+### 🌐 رابط دو زبانه
+- پشتیبانی کامل از انگلیسی و فارسی
+- منوهای کاملاً ترجمه شده
+- سازگار با راست‌چین (RTL)
+
+## 🛠️ نحوه نصب
+
+### نصب سریع:
 ```bash
-git clone https://github.com/YOUR_USERNAME/BluReboot.git
-cd BluReboot
-chmod +x install.sh
-sudo ./install.sh
+bash <(curl -s https://raw.githubusercontent.com/ArkaXray/BluReboot/main/install.sh)
