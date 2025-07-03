@@ -1,7 +1,7 @@
 #!/bin/bash
 # BluReboot Pro - Ultimate Server Reboot Manager
 # Author: BluCloud Labs
-# Version: 3.3
+# Version: 3.4
 
 set -euo pipefail
 trap 'echo -e "${RED}❌ Error in line $LINENO${NC}"; exit 1' ERR
@@ -16,39 +16,22 @@ NC='\033[0m'
 BOLD='\033[1m'
 
 install_gum() {
-    echo -e "${YELLOW}Installing gum...${NC}"
-    if curl -sSf https://gum.dev/install.sh | bash; then
-        export PATH="$HOME/.local/bin:$PATH"
-        echo -e "${GREEN}✔ Installed gum via script${NC}"
-        return 0
-    fi
-    echo -e "${CYAN}Trying direct download method...${NC}"
-    local ARCH=$(uname -m)
-    local OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-    local GUM_VERSION="0.12.0"
-    case "$ARCH" in
-        x86_64) ARCH="amd64" ;;
-        aarch64) ARCH="arm64" ;;
-        armv7l) ARCH="arm" ;;
-        *) ARCH="amd64" ;;
-    esac
-    case "$OS" in
-        darwin) OS="Darwin" ;;
-        linux) OS="Linux" ;;
-        *) OS="Linux" ;;
-    esac
-    URL="https://github.com/charmbracelet/gum/releases/download/v${GUM_VERSION}/gum_${GUM_VERSION}_${OS}_${ARCH}.tar.gz"
-    TEMP_DIR=$(mktemp -d)
-    curl -fsSL "$URL" -o "$TEMP_DIR/gum.tar.gz"
-    tar -xzf "$TEMP_DIR/gum.tar.gz" -C "$TEMP_DIR"
-    sudo mv "$TEMP_DIR/gum" /usr/local/bin/
-    sudo chmod +x /usr/local/bin/gum
-    rm -rf "$TEMP_DIR"
+    echo -e "${YELLOW}Installing gum from official script...${NC}"
+    
+    # نصب از طریق اسکریپت رسمی
+    curl -sSf https://gum.dev/install.sh | bash
+
+    # افزودن مسیر نصب به PATH
+    export PATH="$HOME/.local/bin:$PATH"
+
+    # بررسی نصب
     if command -v gum &>/dev/null; then
-        echo -e "${GREEN}✔ Installed gum manually${NC}"
+        echo -e "${GREEN}✔ gum installed successfully${NC}"
         return 0
+    else
+        echo -e "${RED}❌ gum installation failed${NC}"
+        return 1
     fi
-    return 1
 }
 
 check_dependencies() {
@@ -59,6 +42,7 @@ check_dependencies() {
             exit 1
         }
     fi
+
     if ! command -v figlet &>/dev/null; then
         echo -e "${YELLOW}Installing figlet...${NC}"
         sudo apt-get install -y figlet 2>/dev/null ||
