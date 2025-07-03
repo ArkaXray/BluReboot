@@ -20,4 +20,4 @@ chmod +x "$SCRIPT_NAME"
 sudo mv "$SCRIPT_NAME" "$INSTALL_DIR/"
 
 echo -e "${GREEN}✅ BluReboot installed successfully!${NC}"
-echo -e "${YELLOW}👉 Run it with: ${NC}${GREEN}sudo blureboot${NC}"
+echo -e "${YELLOW}👉 Run with: ${NC}${GREEN}sudo blureboot${NC}"
